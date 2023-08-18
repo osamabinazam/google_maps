@@ -1,0 +1,51 @@
+{% load static%}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{% static '/css/style.css' %}">
+    <title>Distance Matrix Demo</title>
+</head>
+<body>
+    <header>
+        <h1>Users Statistics</h1>
+        <table>
+            <tr>
+                <th>Name</th>
+                <th>latitude</th>
+                <th>longitude</th>
+                <th>ETA (Driving)</th>
+                <th>ETA (Walking)</th>
+                <th>distance</th>
+            </tr>
+
+            {% for result in results %}
+            <tr>
+                <td>{{result.user}}</td>
+                <td>{{result.latitude}}</td>
+                <td>{{result.longitude}}</td>
+                <td>{{result.driving_eta_minutes}}</td>
+                <td>{{result.walking_eta_minutes}}</td>
+                <td>{{result.driving_distance}}</td>
+            </tr>
+
+            {% endfor%}
+        </table>
+        
+        <div class="bottom-panel">
+
+            <div class="estimated-values">
+                <h5>Average distance: <span>{{average_distance}}</span> km</h5>
+                <h5>Total distance: <span>{{total_distance}}</span> km</h5>
+                <h5>Total time (Driving): <span>{{driving_total_time}}</span> minutes</h5>
+                <h5>Total time (Walking): <span>{{walking_total_time}}</span> minutes</h5>
+            </div>
+            <div class="btn-container">
+                <a href="{% url 'index' %}" class="btn">Refresh</a>
+            </div>
+        </div>
+    </header>
+</body>
+</html>
